@@ -81,6 +81,13 @@ habría seguimiento del vehículo.
     <li><strong>El conductor ve siempre que está activo.</strong> Mientras hay un viaje en curso, el
         sistema operativo muestra una notificación permanente. El conductor puede pausar o finalizar el
         viaje en cualquier momento desde la aplicación.</li>
+    <li><strong>Si el conductor pausa el viaje, el recorrido deja de registrarse, pero la aplicación
+        sigue recibiendo la ubicación.</strong> Lo hace con un único fin: detectar si el vehículo
+        volvió a ponerse en marcha, para reanudar el viaje por sí sola y que no se pierda el
+        recorrido. Durante la pausa <strong>no se guarda ni se envía ninguna posición</strong>.</li>
+    <li><strong>Durante la pausa se envía una señal periódica que contiene solo el identificador del
+        vehículo</strong>, sin coordenadas. Sirve para que la plataforma distinga un vehículo en
+        pausa de un teléfono apagado o sin señal.</li>
     <li><strong>Requiere permiso explícito.</strong> Android pide por separado el permiso de ubicación
         "Permitir siempre". Si no se concede, la aplicación no puede reportar con la pantalla apagada.</li>
 </ul>
@@ -99,7 +106,20 @@ Durante un viaje activo, la aplicación envía a la plataforma:
         la aplicación.</li>
     <li><strong>Nivel de batería del teléfono</strong>, para distinguir un vehículo detenido de un teléfono
         descargado.</li>
+    <li><strong>Hechos del viaje</strong>: cuándo el conductor lo pausó, lo reanudó o lo finalizó, con la
+        última ubicación conocida en ese momento. Sirve para que la plataforma pueda distinguir una
+        parada decidida por el conductor de una interrupción por falta de señal.</li>
+    <li><strong>Alarma de emergencia</strong>: si el conductor usa el botón de emergencia, se envía un
+        aviso con la última ubicación conocida y su identificación. <strong>Solo se envía cuando el
+        conductor lo activa manualmente</strong>, manteniéndolo presionado varios segundos.</li>
 </ul>
+
+<p>
+Si en el momento de la emergencia el teléfono no tiene señal, <strong>la alarma queda guardada en el
+propio teléfono</strong> y se envía automáticamente en cuanto vuelve la conexión, conservando la
+hora y el lugar en que el conductor la activó. Es el único dato que la aplicación retiene a la
+espera de poder enviarlo.
+</p>
 
 <p>
 Además, de forma independiente del viaje:
@@ -237,7 +257,7 @@ contactarnos en:
 </p>
 
 <footer>
-    <p>Última actualización: 8 de octubre de 2026.</p>
+    <p>Última actualización: 17 de octubre de 2026.</p>
     <p>Taptrace – powered by <a href="https://www.gpsfacil.com.ar">GPS Fácil</a>.</p>
     <p><a href="../">Política de Privacidad de GPS Fácil</a></p>
 </footer>
